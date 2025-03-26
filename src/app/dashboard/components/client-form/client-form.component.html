@@ -2,7 +2,7 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Código</mat-label>
-        <input type="number" matInput formControlName="id">
+        <input type="text" matInput formControlName="id">
         @if (clientForm.get('id')?.hasError) {
         <mat-error>{{getErrorMessageFromFormField('id')}}</mat-error>
         }

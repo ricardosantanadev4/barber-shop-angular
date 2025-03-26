@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: FixedLayoutComponent, children: [
       { path: 'schedule-painel', component: SchedulePanelComponent, data: { title: 'Agendamentos' } },
       { path: 'client-datail', component: ClientFormComponent, data: { title: 'Cadastrar Cliente' } },
-      { path: 'client-list', component: ClientTableComponent, data: { title: 'Listar Clientes' } },
+      { path: 'client-list', component: ClientTableComponent, data: { title: 'Clientes Cadastrados' } },
     ]
   }
 ];
