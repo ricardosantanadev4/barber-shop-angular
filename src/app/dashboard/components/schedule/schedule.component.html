@@ -51,3 +51,8 @@
 </mat-form-field>
 
 <button mat-stroked-button>Basic</button>
+
+<mat-card class="demo-inline-calendar-card">
+    <mat-calendar [(selected)]="selected"></mat-calendar>
+</mat-card>
+<p>Selected date: {{selected()}}</p>
