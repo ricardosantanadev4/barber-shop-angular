@@ -1,1 +1,37 @@
-<p>client-form works!</p>
+<form [formGroup]="clientForm" class="example-form">
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Código</mat-label>
+        <input type="number" matInput formControlName="codigo">
+        @if (clientForm.get('codigo')?.hasError) {
+        <mat-error>{{getErrorMessageFromFormField('codigo')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput placeholder="Nome" formControlName="nome">
+        @if (clientForm.get('nome')?.hasError) {
+        <mat-error>{{getErrorMessageFromFormField('nome')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Ex. pat@example.com" formControlName="email">
+        @if (clientForm.get('email')?.hasError) {
+        <mat-error>{{getErrorMessageFromFormField('email')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Telefone</mat-label>
+        <input type="text" matInput placeholder="Ex. pat@example.com" formControlName="telefone">
+        @if (clientForm.get('telefone')?.hasError) {
+        <mat-error>{{getErrorMessageFromFormField('telefone')}}</mat-error>
+        }
+    </mat-form-field>
+
+    <button mat-stroked-button>Salvar</button>
+
+</form>
