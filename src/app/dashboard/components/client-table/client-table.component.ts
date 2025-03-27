@@ -14,14 +14,14 @@ import { IClient } from '../../../shared/models/client.interface';
   styleUrl: './client-table.component.scss'
 })
 export class ClientTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'email', 'telefone'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'telefone'];
   dataSource: MatTableDataSource<IClient>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
-    const clients: IClient[] = [{ id: 1, email: 'nome@email.com', telefone: '81999999999' }]
+    const clients: IClient[] = [{ id: 1, nome: 'Nome', email: 'nome@email.com', telefone: '81999999999' }]
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(clients);
