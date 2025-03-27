@@ -20,7 +20,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export class ScheduleComponent {
   toppings = new FormControl('');
 
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+  toppingList: string[] = ['12:00', '12:30', '1:00', ' 1:30', '2:00', '3:00'];
 
   selected = model<Date | null>(null);
 }
