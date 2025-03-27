@@ -20,7 +20,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 export class ScheduleComponent {
   toppings = new FormControl('');
 
-  toppingList: string[] = ['12:00', '12:30', '1:00', ' 1:30', '2:00', '3:00'];
+  horarios: string[] = ['09:00', '10:00', '14:00', ' 15:00', '16:00', '17:00'];
+
+  clients: string[] = ['Rod Johnson', 'Anders Heijsberg', 'Tim Berners-Lee', 'Elon Musk', 'Linus Torwalds', 'James Gosling'];
 
   selected = model<Date | null>(null);
 }
