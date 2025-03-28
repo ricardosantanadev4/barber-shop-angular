@@ -5,6 +5,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { IClient } from '../../../shared/models/client.interface';
+import { ClientService } from '../../../shared/services/client.service';
 
 @Component({
   selector: 'app-client-table',
@@ -14,22 +15,42 @@ import { IClient } from '../../../shared/models/client.interface';
   styleUrl: './client-table.component.scss'
 })
 export class ClientTableComponent implements AfterViewInit {
+  
   displayedColumns: string[] = ['id', 'nome', 'email', 'telefone'];
-  dataSource: MatTableDataSource<IClient>;
+  dataSource: MatTableDataSource<IClient> = new MatTableDataSource<IClient>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    const clients: IClient[] = [{ id: 1, nome: 'Nome', email: 'nome@email.com', telefone: '81999999999' }]
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(clients);
-  }
+  constructor(private clientService: ClientService) {}
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    // Carregar os dados da API após a inicialização
+    this.loadClientsPage();
+
+    // Atualizar a página ao mudar o paginator ou o sort
+    this.paginator.page.subscribe(() => this.loadClientsPage());
+    this.sort.sortChange.subscribe(() => this.loadClientsPage());
+  }
+
+  loadClientsPage() {
+    const pageIndex = this.paginator.pageIndex;
+    const pageSize = this.paginator.pageSize;
+    const sortDirection = this.sort.direction;
+    const sortActive = this.sort.active;
+
+    // Aqui, você irá chamar o seu serviço para obter os dados paginados
+    this.clientService.listarClientesPaginados()
+      .subscribe(response => {
+        if(response.body){
+          this.dataSource.data = response.body;  // Aqui você vai garantir que 'content' é a chave dos dados
+          // this.paginator.length = response.totalElements;  // Atualiza o número total de elementos para paginação
+        }
+        
+      });
   }
 
   applyFilter(event: Event) {
