@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AppSettings } from '../../app.settings';
 import { IClient } from '../models/client.interface';
 import { DaoService } from './dao.service';
+import { IClientPage } from '../models/clientpage.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ClientService {
     // private state: AppState,
   ) { }
 
-  public listarClientesPaginados() {
-    return this.daoService.get<IClient[]>(AppSettings.CLIENTES, DaoService.MEDIA_TYPE_APP_JSON);
+  public listarClientesPaginados(pageIndex?: number, pageSize?: number) {
+    return this.daoService.get<IClientPage>(`${AppSettings.CLIENTES}?pageIndex=${pageIndex}&pageSize=${pageSize}`, DaoService.MEDIA_TYPE_APP_JSON);
   }
 }

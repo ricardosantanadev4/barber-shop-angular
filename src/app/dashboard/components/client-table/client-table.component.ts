@@ -15,14 +15,13 @@ import { ClientService } from '../../../shared/services/client.service';
   styleUrl: './client-table.component.scss'
 })
 export class ClientTableComponent implements AfterViewInit {
-  
+
   displayedColumns: string[] = ['id', 'nome', 'email', 'telefone'];
   dataSource: MatTableDataSource<IClient> = new MatTableDataSource<IClient>([]);
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private clientService: ClientService) {}
+  constructor(private clientService: ClientService) { }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -42,23 +41,34 @@ export class ClientTableComponent implements AfterViewInit {
     const sortDirection = this.sort.direction;
     const sortActive = this.sort.active;
 
-    // Aqui, você irá chamar o seu serviço para obter os dados paginados
-    this.clientService.listarClientesPaginados()
-      .subscribe(response => {
-        if(response.body){
-          this.dataSource.data = response.body;  // Aqui você vai garantir que 'content' é a chave dos dados
-          // this.paginator.length = response.totalElements;  // Atualiza o número total de elementos para paginação
+    this.clientService.listarClientesPaginados(pageIndex, pageSize).subscribe(response => {
+      if (response.body) {
+        this.dataSource.data = response.body.content;
+        this.paginator.length = response.body.totalElements;
+
+        // Habilitar/desabilitar o botão de próxima página
+        if (response.body.number === response.body.totalPages - 1) {
+          this.paginator.hasNextPage = () => false; // Não há próxima página
+        } else {
+          this.paginator.hasNextPage = () => true; // Há próxima página
         }
-        
-      });
+
+        // Habilitar/desabilitar o botão de voltar
+        if (response.body.number === 0) {
+          this.paginator.hasPreviousPage = () => false; // Não há página anterior
+        } else {
+          this.paginator.hasPreviousPage = () => true; // Há página anterior
+        }
+      }
+    });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
+
 }
