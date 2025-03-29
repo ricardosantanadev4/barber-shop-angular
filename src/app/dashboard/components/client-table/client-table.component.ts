@@ -24,6 +24,7 @@ export class ClientTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  filter = '';
   constructor(private clientService: ClientService) { }
 
   ngAfterViewInit() {
