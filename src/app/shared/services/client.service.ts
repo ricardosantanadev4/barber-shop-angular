@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppSettings } from '../../app.settings';
-import { IClientPage } from '../models/clientpage.interface';
 import { DaoService } from './dao.service';
+import { IClientPage } from '../models/client-page.interface';
 
 @Injectable({
   providedIn: 'root'

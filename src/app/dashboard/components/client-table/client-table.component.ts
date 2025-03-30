@@ -5,8 +5,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { IClient } from '../../../shared/models/client.interface';
 import { ClientService } from '../../../shared/services/client.service';
+import { IClient } from '../../../shared/models/client.interface';
 
 @Component({
   selector: 'app-client-table',

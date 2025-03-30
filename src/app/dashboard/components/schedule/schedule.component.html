@@ -1,8 +1,8 @@
 <mat-form-field>
     <mat-label>Início</mat-label>
     <mat-select>
-        @for (topping of horarios; track topping) {
-        <mat-option [value]="topping">{{topping}}</mat-option>
+        @for (time of startTimes; track time) {
+        <mat-option [value]="time">{{time}}</mat-option>
         }
     </mat-select>
 </mat-form-field>
@@ -10,8 +10,8 @@
 <mat-form-field>
     <mat-label>Término</mat-label>
     <mat-select>
-        @for (topping of horarios; track topping) {
-        <mat-option [value]="topping">{{topping}}</mat-option>
+        @for (time of endTimes; track time) {
+        <mat-option [value]="time">{{time}}</mat-option>
         }
     </mat-select>
 </mat-form-field>
