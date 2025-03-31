@@ -19,8 +19,8 @@
 <mat-form-field>
     <mat-label>Selecione o cliente</mat-label>
     <mat-select>
-        @for (topping of clients; track topping) {
-        <mat-option [value]="topping">{{topping}}</mat-option>
+        @for (client of clients; track client) {
+        <mat-option [value]="client">{{client.nome}}</mat-option>
         }
     </mat-select>
 </mat-form-field>
