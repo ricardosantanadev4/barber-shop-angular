@@ -1,34 +1,36 @@
-<mat-form-field>
-    <mat-label>Início</mat-label>
-    <mat-select>
-        @for (time of startTimes; track time) {
-        <mat-option [value]="time">{{time}}</mat-option>
-        }
-    </mat-select>
-</mat-form-field>
+<form [formGroup]="scheduleForm">
+    <mat-form-field>
+        <mat-label>Início</mat-label>
+        <mat-select formControlName="inicio" (selectionChange)="onStartTimeChange($event.value)">
+            @for (time of startTimes; track time) {
+            <mat-option [value]="time">{{time}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
 
-<mat-form-field>
-    <mat-label>Término</mat-label>
-    <mat-select>
-        @for (time of endTimes; track time) {
-        <mat-option [value]="time">{{time}}</mat-option>
-        }
-    </mat-select>
-</mat-form-field>
+    <mat-form-field>
+        <mat-label>Término</mat-label>
+        <mat-select formControlName="fim" [disabled]="!selectedStartTime">
+            @for (time of endTimes; track time) {
+            <mat-option [value]="time">{{time}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
 
-<mat-form-field>
-    <mat-label>Selecione o cliente</mat-label>
-    <mat-select>
-        @for (client of clients; track client) {
-        <mat-option [value]="client">{{client.nome}}</mat-option>
-        }
-    </mat-select>
-</mat-form-field>
+    <mat-form-field>
+        <mat-label>Selecione o cliente</mat-label>
+        <mat-select formControlName="cliente">
+            @for (client of clients; track client) {
+            <mat-option [value]="client">{{client.nome}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
 
+    <mat-card class="demo-inline-calendar-card">
+        <mat-calendar [(selected)]="selected"></mat-calendar>
+    </mat-card>
+    <p>Selected date: {{selected()}}</p>
 
-<button mat-stroked-button>Salvar</button>
+</form>
 
-<mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selected"></mat-calendar>
-</mat-card>
-<p>Selected date: {{selected()}}</p>
+<button mat-stroked-button (click)="createSchedule()">Salvar</button>
