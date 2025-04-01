@@ -6,7 +6,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { add, format, parse } from 'date-fns';
+import { add, format, isSameDay, parse } from 'date-fns';
 import { IClient } from '../../../shared/models/client.interface';
 import { ClientService } from '../../../shared/services/client.service';
 import { ScheduleService } from '../../../shared/services/schedule.service';
@@ -74,12 +74,26 @@ export class ScheduleComponent implements OnInit {
   }
 
   createSchedule() {
-    const formattedDate = this.formattDataValueToyyyyMMdd();
-    this.setDataForm(formattedDate);
-    if (this.scheduleForm.valid) {
-      this.scheduleService.createSchedule(this.scheduleForm.value).subscribe();
+    if (this.verifyDateIsValid()) {
+      const formattedDate = this.formattDataValueToyyyyMMdd();
+      this.setDateForm(formattedDate);
+      if (this.scheduleForm.valid) {
+        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe();
+      }else{
+        alert('Formulário invalido! Verifique os campos e tente novamente.')
+      }
     }
+  }
 
+  verifyDateIsValid() {
+    const dateSelected = this.selected();
+    const currentDate = new Date();
+    if (dateSelected && isSameDay(dateSelected, currentDate) || dateSelected && dateSelected > currentDate) {
+      return true;
+    } else {
+      alert(`Data inválida: ${dateSelected}`);
+      return false;
+    }
   }
 
   formattDataValueToyyyyMMdd() {
@@ -92,7 +106,7 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  setDataForm(formattedDate: string) {
+  setDateForm(formattedDate: string) {
     this.scheduleForm.setValue({
       inicio: this.scheduleForm.get('inicio')?.value,
       fim: this.scheduleForm.get('fim')?.value,
