@@ -74,21 +74,31 @@ export class ScheduleComponent implements OnInit {
   }
 
   createSchedule() {
+    const formattedDate = this.formattDataValueToyyyyMMdd();
+    this.setDataForm(formattedDate);
+    if (this.scheduleForm.valid) {
+      this.scheduleService.createSchedule(this.scheduleForm.value).subscribe();
+    }
+
+  }
+
+  formattDataValueToyyyyMMdd() {
     const dataValue = this.selected();
     if (dataValue) {
       const formattedDate = format(dataValue, 'yyyy-MM-dd');
-      this.scheduleForm.setValue({
-        inicio: this.scheduleForm.get('inicio')?.value,
-        fim: this.scheduleForm.get('fim')?.value,
-        data: formattedDate,
-        cliente: this.scheduleForm.get('cliente')?.value,
-      });
-
-      if(this.scheduleForm.valid){
-        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe();
-      }
-      
+      return formattedDate;
+    } else {
+      return '';
     }
+  }
+
+  setDataForm(formattedDate: string) {
+    this.scheduleForm.setValue({
+      inicio: this.scheduleForm.get('inicio')?.value,
+      fim: this.scheduleForm.get('fim')?.value,
+      data: formattedDate,
+      cliente: this.scheduleForm.get('cliente')?.value,
+    });
   }
 
 }
