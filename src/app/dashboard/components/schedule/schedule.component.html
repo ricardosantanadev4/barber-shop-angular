@@ -17,13 +17,14 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="example-full-width">
         <mat-label>Selecione o cliente</mat-label>
-        <mat-select formControlName="cliente">
-            @for (client of clients; track client) {
-            <mat-option [value]="client">{{client.nome}}</mat-option>
+        <input type="text" aria-label="Selecione o cliente" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            @for (option of filteredOptions | async; track option) {
+            <mat-option [value]="option">{{option}}</mat-option>
             }
-        </mat-select>
+        </mat-autocomplete>
     </mat-form-field>
 
     <mat-card class="demo-inline-calendar-card">

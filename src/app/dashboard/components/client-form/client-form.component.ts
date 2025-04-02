@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ClientService } from '../../../shared/services/client.service';
+import { catchError, of } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-client-form',
@@ -15,7 +18,7 @@ export class ClientFormComponent {
   // emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   clientForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private clientService: ClientService) {
     this.initForm();
   }
 
@@ -40,4 +43,16 @@ export class ClientFormComponent {
     }
   }
 
+  createClient() {
+    console.log('createClient()');
+    if (this.clientForm.valid) {
+      this.clientService.createClient(this.clientForm.value).pipe(
+        catchError((error: HttpErrorResponse) => of(alert(error.error.message))),
+      ).subscribe({
+        next: () => {
+          alert('Cliente cadastrado com sucesso!');
+        }
+      });
+    }
+  }
 }
