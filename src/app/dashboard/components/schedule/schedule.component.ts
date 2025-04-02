@@ -30,11 +30,12 @@ export class ScheduleComponent implements OnInit {
   scheduleForm!: FormGroup;
   startTimes: string[] = ['08:00', '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00'];
   endTimes: string[] = [];
-  nameClients: string[] = [];
+  clients!: IClient[];
   selected = model<Date | null>(null);
   selectedStartTime: string | null = null;
   myControl = new FormControl('');
-  filteredOptions!: Observable<string[]>;
+  filteredOptions!: Observable<IClient[]>;
+  filter = '';
 
   constructor(private formBuilder: FormBuilder, private clientService: ClientService,
     private scheduleService: ScheduleService) {
@@ -55,10 +56,10 @@ export class ScheduleComponent implements OnInit {
   }
 
   loadClients() {
-    this.clientService.listarClientesPaginados(0, 10, '').subscribe(response => {
+    this.clientService.listarClientesPaginados(0, 10, this.filter).subscribe(response => {
       if (response.body) {
-        this.nameClients = response.body.content.map(client => client.nome);
-        this.observableToFiltering();
+        this.clients = response.body.content;
+        this.observableToFiltering()
       }
     })
   }
@@ -70,9 +71,19 @@ export class ScheduleComponent implements OnInit {
     )
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.nameClients.filter(option => option.toLowerCase().includes(filterValue));
+  // options: string[] = ['One', 'Two', 'Three'];
+
+  private _filter(value: string | IClient): IClient[] {
+    const filterValue = typeof value === 'string' ? value.toLowerCase() : value.nome.toLowerCase();
+    return this.clients.filter(option => option.nome.toLowerCase().includes(filterValue));
+  }
+
+  onClientSelected(cliente: IClient) {
+    this.scheduleForm.patchValue({ cliente });
+  }
+
+  displayFn(cliente?: IClient): string {
+    return cliente ? cliente.nome : '';
   }
 
   onStartTimeChange(startTime: string) {
@@ -98,6 +109,7 @@ export class ScheduleComponent implements OnInit {
       const formattedDate = this.formattDataValueToyyyyMMdd();
       this.setDateForm(formattedDate);
       if (this.scheduleForm.valid) {
+        console.log(this.scheduleForm.value);
         this.scheduleService.createSchedule(this.scheduleForm.value).pipe(
           catchError((error: HttpErrorResponse) => of(alert(error.error.message))),
         ).subscribe({
@@ -140,5 +152,6 @@ export class ScheduleComponent implements OnInit {
       cliente: this.scheduleForm.get('cliente')?.value,
     });
   }
+
 
 }
