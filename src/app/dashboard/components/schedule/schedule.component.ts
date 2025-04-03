@@ -71,8 +71,6 @@ export class ScheduleComponent implements OnInit {
     )
   }
 
-  // options: string[] = ['One', 'Two', 'Three'];
-
   private _filter(value: string | IClient): IClient[] {
     const filterValue = typeof value === 'string' ? value.toLowerCase() : value.nome.toLowerCase();
     return this.clients.filter(option => option.nome.toLowerCase().includes(filterValue));

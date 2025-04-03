@@ -22,4 +22,8 @@ export class ClientService {
   public listarClientesPaginados(pageIndex?: number, pageSize?: number, filter?: string) {
     return this.daoService.get<IClientPage>(`${AppSettings.CLIENTES}?pageIndex=${pageIndex}&pageSize=${pageSize}&filter=${filter}`, DaoService.MEDIA_TYPE_APP_JSON);
   }
+
+  public getClientById(id: number) {
+    return this.daoService.get<IClient>(`${AppSettings.CLIENTES}/${id}`, DaoService.MEDIA_TYPE_APP_JSON);
+  }
 }

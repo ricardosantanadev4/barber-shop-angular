@@ -19,20 +19,16 @@
 
     <mat-form-field class="example-full-width">
         <mat-label>Number</mat-label>
-        <input type="text"
-               placeholder="Pick one"
-               aria-label="Number"
-               matInput
-               [formControl]="myControl"
-               [matAutocomplete]="auto"
-               [(ngModel)]="filter" (keydown.enter)="loadClients()">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onClientSelected($event.option.value)">
-          @for (option of filteredOptions | async; track option) {
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+            [matAutocomplete]="auto" [(ngModel)]="filter" (keydown.enter)="loadClients()">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+            (optionSelected)="onClientSelected($event.option.value)">
+            @for (option of filteredOptions | async; track option) {
             <mat-option [value]="option">{{option.nome}}</mat-option>
-          }
+            }
         </mat-autocomplete>
-      </mat-form-field>
-      
+    </mat-form-field>
+
     <mat-card class="demo-inline-calendar-card">
         <mat-calendar [(selected)]="selected"></mat-calendar>
     </mat-card>

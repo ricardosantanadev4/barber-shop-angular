@@ -1,23 +1,27 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-import { ClientService } from '../../../shared/services/client.service';
+import { Router } from '@angular/router';
 import { IClient } from '../../../shared/models/client.interface';
+import { ClientService } from '../../../shared/services/client.service';
 
 @Component({
   selector: 'app-client-table',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, FormsModule,
+    MatButtonModule, MatIconModule],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.scss'
 })
 export class ClientTableComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'nome', 'email', 'telefone'];
+  displayedColumns: string[] = ['id', 'nome', 'email', 'telefone', 'acoes'];
   clients: IClient[] = []; // Armazena os dados diretamente
   totalElements = 0;
 
@@ -25,7 +29,7 @@ export class ClientTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   filter = '';
-  constructor(private clientService: ClientService) { }
+  constructor(private clientService: ClientService, private router: Router) { }
 
   ngAfterViewInit() {
     this.loadClientsPage();
@@ -53,4 +57,9 @@ export class ClientTableComponent implements AfterViewInit {
       }
     });
   }
+
+  navigateTo(route: string, id: number) {
+    this.router.navigate([route, id]);
+  }
+
 }

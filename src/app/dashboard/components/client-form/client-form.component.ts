@@ -1,11 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ClientService } from '../../../shared/services/client.service';
+import { ActivatedRoute } from '@angular/router';
 import { catchError, of } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
+import { IClient } from '../../../shared/models/client.interface';
+import { ClientService } from '../../../shared/services/client.service';
 
 @Component({
   selector: 'app-client-form',
@@ -18,16 +20,18 @@ export class ClientFormComponent {
   // emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   clientForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private clientService: ClientService) {
-    this.initForm();
+  constructor(private formBuilder: FormBuilder, private clientService: ClientService, private route: ActivatedRoute) {
+    const clientResolver: IClient = this.route.snapshot.data['client'];
+    console.log(clientResolver);
+    this.initForm(clientResolver);
   }
 
-  initForm() {
+  initForm(clientResolver: IClient) {
     this.clientForm = this.formBuilder.group({
-      id: [''],
-      nome: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', [Validators.required]]
+      id: [clientResolver?.id],
+      nome: [clientResolver?.nome, [Validators.required]],
+      email: [clientResolver?.email, [Validators.required, Validators.email]],
+      telefone: [clientResolver?.telefone, [Validators.required]]
     })
   }
 
