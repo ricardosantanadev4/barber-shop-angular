@@ -1,5 +1,11 @@
 .example-card {
     max-width: 400px;
+
+    mat-card-content{
+        display: flex;
+        justify-content: center;
+        // padding: 0;
+    }
 }
 
 .example-header-image {

@@ -1,46 +1,47 @@
-<div style="display: flex; justify-content: center;">
-    <form [formGroup]="scheduleForm">
-        <div class="mat-form-field-container">
-            <mat-form-field>
-                <mat-label>Início</mat-label>
-                <mat-select formControlName="inicio" (selectionChange)="onStartTimeChange($event.value)">
-                    @for (time of startTimes; track time) {
-                    <mat-option [value]="time">{{time}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
+<form [formGroup]="scheduleForm" style="display: flex;">
+    <div class="mat-form-field-container">
+        <mat-form-field>
+            <mat-label>Início</mat-label>
+            <mat-select formControlName="inicio" (selectionChange)="onStartTimeChange($event.value)">
+                @for (time of startTimes; track time) {
+                <mat-option [value]="time">{{time}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Término</mat-label>
-                <mat-select formControlName="fim" [disabled]="!selectedStartTime">
-                    @for (time of endTimes; track time) {
-                    <mat-option [value]="time">{{time}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
+        <mat-form-field>
+            <mat-label>Término</mat-label>
+            <mat-select formControlName="fim" [disabled]="!selectedStartTime">
+                @for (time of endTimes; track time) {
+                <mat-option [value]="time">{{time}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
 
-            <mat-form-field>
-                <mat-label>Number</mat-label>
-                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
-                    [matAutocomplete]="auto" [(ngModel)]="filter" (keydown.enter)="loadClients()">
-                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
-                    (optionSelected)="onClientSelected($event.option.value)">
-                    @for (option of filteredOptions | async; track option) {
-                    <mat-option [value]="option">{{option.nome}}</mat-option>
-                    }
-                </mat-autocomplete>
-            </mat-form-field>
+        <mat-form-field>
+            <mat-label>Number</mat-label>
+            <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                [matAutocomplete]="auto" [(ngModel)]="filter" (keydown.enter)="loadClients()">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                (optionSelected)="onClientSelected($event.option.value)">
+                @for (option of filteredOptions | async; track option) {
+                <mat-option [value]="option">{{option.nome}}</mat-option>
+                }
+            </mat-autocomplete>
+        </mat-form-field>
+    </div>
+
+    <div class="calendar-container">
+        <mat-card class="demo-inline-calendar-card">
+            <mat-calendar [(selected)]="selected"></mat-calendar>
+        </mat-card>
+        <!-- <p>Selected date: {{selected()}}</p> -->
+        <div class="button-container">
+            <button mat-stroked-button (click)="createSchedule()">Salvar</button>
         </div>
+    </div>
+</form>
 
-        <div class="clendar-container">
-            <mat-card class="demo-inline-calendar-card">
-                <mat-calendar [(selected)]="selected"></mat-calendar>
-            </mat-card>
-            <!-- <p>Selected date: {{selected()}}</p> -->
-        </div>
-    </form>
-</div>
-
-<div class="button-container">
+<!-- <div class="button-container">
     <button mat-stroked-button (click)="createSchedule()">Salvar</button>
-</div>
+</div> -->

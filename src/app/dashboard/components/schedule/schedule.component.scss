@@ -1,8 +1,10 @@
 .mat-form-field-container {
-  display: flex;
-  gap: 20px;
+  width: 212px;
 
   mat-form-field {
+    display: flex;
+
+    margin: 0 0 10px 0;
     background-color: #2C3A45;
 
     mat-label {
@@ -15,21 +17,23 @@
   }
 }
 
-.clendar-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
+
+.calendar-container {
+  padding: 0 0 0px 20px;
 
   .demo-inline-calendar-card {
-    width: 300px;
+    width: 435px;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0 0 0;
   }
 }
 
 
-.button-container {
-  display: flex;
-  justify-content: center;
-}
+
 
 // Cor do texto no campo de input do component autocomplet
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
