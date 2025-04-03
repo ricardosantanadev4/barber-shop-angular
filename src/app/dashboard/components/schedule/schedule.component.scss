@@ -1,7 +1,24 @@
-.example-additional-selection {
-  opacity: 0.75;
-  font-size: 0.75em;
-  line-height: 1;
+mat-form-field {
+  background-color: #2C3A45;
+
+  mat-label {
+    color: #F6FCFE;
+  }
+
+  mat-select {
+    color: #F6FCFE;
+  }
+
+}
+
+// Cor do texto no campo de input do component autocomplet
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: #F6FCFE !important;
+}
+
+// Cor da borda inferior dos campos do formulário
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+  border-bottom-color: white !important;
 }
 
 .demo-inline-calendar-card {
