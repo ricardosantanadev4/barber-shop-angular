@@ -2,10 +2,13 @@ mat-card {
     max-width: 400px;
     background-color: #CACED1;
 
-    mat-card-content{
+    mat-card-content {
         display: flex;
         justify-content: center;
-        // padding: 0;
+
+        h2 {
+            color: #0B1124;
+        }
     }
 }
 

@@ -5,6 +5,7 @@
     display: flex;
 
     margin: 0 0 10px 0;
+    border-radius: 22px;
     background-color: #2C3A45;
 
     mat-label {
@@ -17,7 +18,6 @@
   }
 }
 
-
 .calendar-container {
   padding: 0 0 0px 20px;
 
@@ -29,11 +29,24 @@
     display: flex;
     justify-content: center;
     padding: 20px 0 0 0;
+
+    button{
+      background-color: #2C3A45;
+      color: #F6FCFE;
+    }
   }
 }
 
+// Cor da borda no dia selecionado
+::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  border-color: #2C3A45 !important;
+}
 
-
+// Estilos do body no dia selecionado
+::ng-deep .mat-calendar-body-selected{
+  background-color: #2C3A45 !important;
+      color: #F6FCFE !important;
+}
 
 // Cor do texto no campo de input do component autocomplet
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {

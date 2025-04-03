@@ -9,7 +9,7 @@ import { SchedulePanelComponent } from './components/schedule-panel/schedule-pan
 const routes: Routes = [
   {
     path: '', component: FixedLayoutComponent, children: [
-      { path: 'schedule-painel', component: SchedulePanelComponent, data: { title: 'Agendamentos' } },
+      { path: 'schedule-painel', component: SchedulePanelComponent, data: { title: 'AGENDAMENTOS' } },
       { path: 'client-detail', component: ClientFormComponent, data: { title: 'Cadastrar Cliente' } },
       {
         path: 'client-detail/:id', component: ClientFormComponent, data: { title: 'Editar Cliente' },

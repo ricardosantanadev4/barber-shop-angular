@@ -1,8 +1,16 @@
-mat-toolbar{
+mat-toolbar {
     color: #F5F7F9;
     background-color: #192531;
+    padding: 36px 30px;
 
+    span{
+        font-size: 40px;
+    }
     .example-spacer {
         flex: 1 1 auto;
+    }
+
+    .toolbar-icon {
+        color: #F5F7F9;
     }
 }
