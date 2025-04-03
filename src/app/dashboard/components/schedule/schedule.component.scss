@@ -37,6 +37,11 @@
   }
 }
 
+// Cor do arrow svg
+::ng-deep .mat-mdc-select-arrow svg{
+  fill: white !important;
+}
+
 // Cor da borda no dia selecionado
 ::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
   border-color: #2C3A45 !important;

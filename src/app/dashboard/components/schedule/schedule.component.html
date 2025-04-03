@@ -19,7 +19,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Number</mat-label>
+            <mat-label>Cliente</mat-label>
             <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
                 [matAutocomplete]="auto" [(ngModel)]="filter" (keydown.enter)="loadClients()">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
