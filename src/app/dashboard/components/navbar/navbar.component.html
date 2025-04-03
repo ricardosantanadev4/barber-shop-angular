@@ -1,10 +1,12 @@
-<button mat-button [matMenuTriggerFor]="menuClients">Clientes</button>
-<mat-menu #menuClients="matMenu">
-    <button mat-menu-item (click)="navigateTo('client-detail')">Cadastro</button>
-    <button mat-menu-item (click)="navigateTo('client-list')">Listagem</button>
-</mat-menu>
+<nav>
+    <button mat-button [matMenuTriggerFor]="menuClients">Clientes</button>
+    <mat-menu #menuClients="matMenu">
+        <button mat-menu-item (click)="navigateTo('client-detail')">Cadastro</button>
+        <button mat-menu-item (click)="navigateTo('client-list')">Listagem</button>
+    </mat-menu>
 
-<button mat-button [matMenuTriggerFor]="menuSchedule">Agendar</button>
-<mat-menu #menuSchedule="matMenu">
-    <button mat-menu-item (click)="navigateTo('schedule-painel')">Calendário</button>
-</mat-menu>
+    <button mat-button [matMenuTriggerFor]="menuSchedule">Agendar</button>
+    <mat-menu #menuSchedule="matMenu">
+        <button mat-menu-item (click)="navigateTo('schedule-painel')">Calendário</button>
+    </mat-menu>
+</nav>
