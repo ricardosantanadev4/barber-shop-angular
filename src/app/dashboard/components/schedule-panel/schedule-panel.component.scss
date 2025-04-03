@@ -1,13 +1,18 @@
-.panel-container{
+.schedule-panel-container {
     padding: 20px;
     background-color: #D8DAD9;
 }
 
-.schedule-list-container {
+.schedule-card-container {
     display: flex;
+    align-items: stretch;
     padding: 0 0 20px 0;
 
-    .card-container{
-        // padding: 30px;
+    .card-container {
+        padding: 0 20px 0 0;
+    }
+
+    .schedule-container {
+        flex-grow: 1;
     }
 }
