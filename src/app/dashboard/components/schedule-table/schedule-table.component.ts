@@ -7,17 +7,18 @@ import { MatTableModule } from '@angular/material/table';
 import { ISchedule } from '../../../shared/models/schedule.interface';
 import { ScheduleService } from '../../../shared/services/schedule.service';
 import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-schedule-table',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, FormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatTableModule, MatSortModule, MatPaginatorModule, FormsModule, DatePipe],
   templateUrl: './schedule-table.component.html',
   styleUrl: './schedule-table.component.scss'
 })
 export class ScheduleTableComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'inicio', 'termino', 'cliente'];
+  displayedColumns: string[] = ['id', 'inicio', 'termino', 'date', 'cliente'];
   shedules: ISchedule[] = []; // Armazena os dados diretamente
   totalElements = 0;
 

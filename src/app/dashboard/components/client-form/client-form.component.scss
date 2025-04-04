@@ -1,9 +1,32 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .example-form {
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+        color: #0B1124;
+
+        .example-full-width {
+            width: 100%;
+        }
+
+        .button-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            button{
+                background-color: #192531;
+                color: #F5F7F9;
+            }
+        }
+    }
+
 }
 
-.example-full-width {
-    width: 100%;
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: #192531 !important;
 }

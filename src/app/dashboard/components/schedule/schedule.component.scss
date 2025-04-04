@@ -12,6 +12,10 @@
       color: #F6FCFE;
     }
 
+    input{
+      color: #F6FCFE !important;
+    }
+
     mat-select {
       color: #F6FCFE;
     }
@@ -30,15 +34,15 @@
     justify-content: center;
     padding: 20px 0 0 0;
 
-    button{
-      background-color: #2C3A45;
-      color: #F6FCFE;
+    .button {
+      background-color: #192531;
+      color: #F5F7F9;
     }
   }
 }
 
 // Cor do arrow svg
-::ng-deep .mat-mdc-select-arrow svg{
+::ng-deep .mat-mdc-select-arrow svg {
   fill: white !important;
 }
 
@@ -48,13 +52,8 @@
 }
 
 // Estilos do body no dia selecionado
-::ng-deep .mat-calendar-body-selected{
+::ng-deep .mat-calendar-body-selected {
   background-color: #2C3A45 !important;
-      color: #F6FCFE !important;
-}
-
-// Cor do texto no campo de input do component autocomplet
-::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
   color: #F6FCFE !important;
 }
 
@@ -62,3 +61,4 @@
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
   border-bottom-color: white !important;
 }
+

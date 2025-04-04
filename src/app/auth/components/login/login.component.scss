@@ -6,9 +6,11 @@
 
     .example-card {
         max-width: 400px;
+        width: 304px;
+        padding: 19px;
 
         .example-header-image {
-            background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+            background-image: url('/assets/barber-photo.png');
             background-size: cover;
         }
 
@@ -31,6 +33,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+
+            button {
+                padding: 20px;
+                background-color: #192531;
+                color: #F5F7F9;
+            }
         }
     }
 

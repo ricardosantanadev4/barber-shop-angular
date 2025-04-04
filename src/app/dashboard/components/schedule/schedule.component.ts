@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, NgClass } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, model, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -21,7 +21,7 @@ import { ScheduleService } from '../../../shared/services/schedule.service';
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [MatFormFieldModule, MatSelectModule, FormsModule, ReactiveFormsModule, MatButtonModule, MatCardModule,
-    MatDatepickerModule, MatAutocompleteModule, AsyncPipe, MatInputModule],
+    MatDatepickerModule, MatAutocompleteModule, AsyncPipe, MatInputModule, NgClass],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
 })
@@ -36,6 +36,7 @@ export class ScheduleComponent implements OnInit {
   myControl = new FormControl('');
   filteredOptions!: Observable<IClient[]>;
   filter = '';
+  clientSelected = false;
 
   constructor(private formBuilder: FormBuilder, private clientService: ClientService,
     private scheduleService: ScheduleService) {
@@ -77,6 +78,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   onClientSelected(cliente: IClient) {
+    this.clientSelected = true;
     this.scheduleForm.patchValue({ cliente });
   }
 

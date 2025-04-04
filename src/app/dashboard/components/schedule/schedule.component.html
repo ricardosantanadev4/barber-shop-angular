@@ -37,7 +37,10 @@
         </mat-card>
         <!-- <p>Selected date: {{selected()}}</p> -->
         <div class="button-container">
-            <button mat-stroked-button (click)="createSchedule()">Salvar</button>
+            <button mat-stroked-button (click)="createSchedule()" [ngClass]="{'button': clientSelected}" [disabled]="!clientSelected">Salvar</button>
+            <!-- <button mat-button disabled>Disabled</button> -->
         </div>
     </div>
 </form>
+
+

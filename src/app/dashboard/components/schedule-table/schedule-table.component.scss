@@ -1,4 +1,5 @@
-  table {
+  
+table {
     width: 100%;
   }
 
@@ -11,3 +12,8 @@
   th {
     width: 25%;
   }
+
+  // Estilos no texto do campo de imput
+  ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: #192531 !important;
+}
