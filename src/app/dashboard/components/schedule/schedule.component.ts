@@ -14,6 +14,7 @@ import { add, format, isAfter, isSameDay, parse } from 'date-fns';
 import { map, Observable, startWith } from 'rxjs';
 import { IClient } from '../../../shared/models/client.interface';
 import { ClientService } from '../../../shared/services/client.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 import { ScheduleService } from '../../../shared/services/schedule.service';
 
 @Component({
@@ -40,7 +41,7 @@ export class ScheduleComponent implements OnInit {
   clientSelected = false;
 
   constructor(private formBuilder: FormBuilder, private clientService: ClientService,
-    private scheduleService: ScheduleService) {
+    private scheduleService: ScheduleService, private notificationService: NotificationService) {
     this.initForm();
   }
 
@@ -114,14 +115,15 @@ export class ScheduleComponent implements OnInit {
         console.log(this.scheduleForm.value);
         this.scheduleService.createSchedule(this.scheduleForm.value).subscribe({
           next: () => {
-            alert('Agendamento criado com uscesso!');
+            this.notificationService.showSuccess('Agendamento criado com uscesso!', 'Sucesso');
           },
           error: (error: HttpErrorResponse) => {
-            alert(error.error.message);
+            // alert(error.error.message);
+            this.notificationService.showError(error.error.message, 'erro');
           }
         });
       } else {
-        alert('Formulário invalido! Verifique os campos e tente novamente.')
+        this.notificationService.showError('Formulário invalido! Verifique os campos e tente novamente.', 'Erro');
       }
     }
   }
@@ -132,7 +134,7 @@ export class ScheduleComponent implements OnInit {
     if (dateSelected && isSameDay(dateSelected, currentDate) || dateSelected && isAfter(dateSelected, currentDate)) {
       return true;
     } else {
-      alert('Data inválida! Selecione uma data válida.');
+      this.notificationService.showError('Data inválida! Selecione uma data posterior ou igual a atual.', 'Erro');
       return false;
     }
   }
@@ -148,7 +150,7 @@ export class ScheduleComponent implements OnInit {
       || dateSelected && isAfter(dateSelected, currentDate)) {
       return true;
     } else {
-      alert('Horário inválido. Selecione um horário maior que o atual');
+      this.notificationService.showError('Horário inválido. Selecione um horário maior que o atual', 'Erro');
       return false;
     }
   }
