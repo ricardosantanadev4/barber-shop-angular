@@ -10,8 +10,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { add, format, isSameDay, parse } from 'date-fns';
-import { catchError, map, Observable, of, startWith } from 'rxjs';
+import { add, format, isAfter, isSameDay, parse } from 'date-fns';
+import { map, Observable, startWith } from 'rxjs';
 import { IClient } from '../../../shared/models/client.interface';
 import { ClientService } from '../../../shared/services/client.service';
 import { ScheduleService } from '../../../shared/services/schedule.service';
@@ -32,6 +32,7 @@ export class ScheduleComponent implements OnInit {
   endTimes: string[] = [];
   clients!: IClient[];
   selected = model<Date | null>(null);
+  startTime = '';
   selectedStartTime: string | null = null;
   myControl = new FormControl('');
   filteredOptions!: Observable<IClient[]>;
@@ -87,6 +88,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   onStartTimeChange(startTime: string) {
+    this.startTime = startTime;
     if (startTime) {
       this.selectedStartTime = startTime;
 
@@ -105,16 +107,17 @@ export class ScheduleComponent implements OnInit {
   }
 
   createSchedule() {
-    if (this.verifyDateIsValid()) {
+    if (this.verifyDateIsValid() && this.verifyStartTimeIsValid()) {
       const formattedDate = this.formattDataValueToyyyyMMdd();
       this.setDateForm(formattedDate);
       if (this.scheduleForm.valid) {
         console.log(this.scheduleForm.value);
-        this.scheduleService.createSchedule(this.scheduleForm.value).pipe(
-          catchError((error: HttpErrorResponse) => of(alert(error.error.message))),
-        ).subscribe({
+        this.scheduleService.createSchedule(this.scheduleForm.value).subscribe({
           next: () => {
             alert('Agendamento criado com uscesso!');
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.error.message);
           }
         });
       } else {
@@ -126,10 +129,26 @@ export class ScheduleComponent implements OnInit {
   verifyDateIsValid() {
     const dateSelected = this.selected();
     const currentDate = new Date();
-    if (dateSelected && isSameDay(dateSelected, currentDate) || dateSelected && dateSelected > currentDate) {
+    if (dateSelected && isSameDay(dateSelected, currentDate) || dateSelected && isAfter(dateSelected, currentDate)) {
       return true;
     } else {
       alert('Data inválida! Selecione uma data válida.');
+      return false;
+    }
+  }
+
+  verifyStartTimeIsValid() {
+    const startTimeStr = this.startTime;
+    const currentTime = parse(`${new Date().getHours()}:${new Date().getMinutes()}`, 'H:m', new Date());
+    const startTime = parse(startTimeStr, 'HH:mm', new Date());
+    const dateSelected = this.selected();
+    const currentDate = new Date();
+
+    if (isAfter(startTime, currentTime) && dateSelected && isSameDay(dateSelected, currentDate)
+      || dateSelected && isAfter(dateSelected, currentDate)) {
+      return true;
+    } else {
+      alert('Horário inválido. Selecione um horário maior que o atual');
       return false;
     }
   }
