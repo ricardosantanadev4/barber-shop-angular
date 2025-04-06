@@ -6,10 +6,16 @@
     box-sizing: border-box;
 }
 
+html{
+    --mdc-filled-text-field-focus-active-indicator-color: #60A1E4;
+}
+
 html,
 body {
     height: 100%;
 }
+
+
 
 body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
