@@ -3,7 +3,7 @@
 Este é um projeto desenvolvido como parte do curso na plataforma DIO sobre construção de aplicações com Angular. O objetivo foi criar um sistema de agendamentos para uma barbearia, colocando em prática os conhecimentos adquiridos ao longo do curso.
 
 ## 📸 Demonstração
-![Demonstração do sistema](https://github.com/ricardosantanadev4/angular-blog/blob/main/blog-angular-layout-Dribbble-ezgif.com-video-to-gif-converter.gif)
+![Demonstração do sistema](https://github.com/ricardosantanadev4/barber-shop-angular/blob/main/Baber-shop.gif)
 
 ## 🚀 Tecnologias Utilizadas
 - Angular 18
